@@ -3,22 +3,16 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // 생성자 만들어주는 어노테이션
 public class OrderServiceImpl implements OrderService {
 
     // final => 초기값을 설정하는 것 아니면 생성자를 통해서만 값 할당 가능
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
-
-    // 생성자가 딱 1개만 존재할때는 @Autowired 생략해도 가능함
-//    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
